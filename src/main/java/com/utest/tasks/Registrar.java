@@ -38,7 +38,7 @@ public class Registrar implements Task {
         );
     }
 
-    public static Registrar localizacion() {
+    public static Registrar ubicacion() {
         return instrumented(Registrar.class);
     }
 }

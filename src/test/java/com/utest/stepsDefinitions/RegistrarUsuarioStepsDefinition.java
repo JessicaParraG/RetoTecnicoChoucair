@@ -33,7 +33,7 @@ public class RegistrarUsuarioStepsDefinition {
     public void elUsuarioSeQuieraRegistrarParaCrearUnaCuenta() {
         OnStage.theActorInTheSpotlight().attemptsTo(
                 RegistrarUsuario.nuevo(),
-                Registrar.localizacion(),
+                Registrar.ubicacion(),
                 RegistrarLos.dispositivos(),
                 Crear.contrasena()
         );
