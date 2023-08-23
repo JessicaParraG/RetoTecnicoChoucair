@@ -29,25 +29,27 @@ targetCompatibility = 1.8
 
 ext {
     slf4jVersion = '1.7.7'
-    serenityCoreVersion = '2.3.31'
-    serenityCucumberVersion = '2.3.31'
+    serenityCoreVersion = '3.7.1'
+    serenityCucumberVersion = '3.3.2'
     junitVersion = '4.13.1'
     assertJVersion = '3.8.0'
     logbackVersion = '1.2.3'
 }
 
 dependencies {
-
     implementation "net.serenity-bdd:serenity-core:${serenityCoreVersion}"
-    implementation "net.serenity-bdd:serenity-cucumber6:${serenityCucumberVersion}"
+    implementation "net.serenity-bdd:serenity-cucumber:${serenityCucumberVersion}"
     implementation "net.serenity-bdd:serenity-screenplay:${serenityCoreVersion}"
     implementation "net.serenity-bdd:serenity-screenplay-webdriver:${serenityCoreVersion}"
     implementation "org.assertj:assertj-core:${assertJVersion}"
     implementation group: 'org.apache.poi', name: 'poi', version: '5.0.0'
     implementation group: 'org.apache.poi', name: 'poi-ooxml', version: '5.0.0'
-
     implementation group: 'commons-io', name: 'commons-io', version: '2.9.0'
-
+    implementation group: 'com.github.javafaker', name: 'javafaker', version: '1.0.2'
+    implementation group: 'org.slf4j', name: 'slf4j-api', version: '2.0.0-alpha5'
+    implementation group: 'org.slf4j', name: 'slf4j-simple', version: '2.0.0-alpha5'
+    implementation 'org.junit.jupiter:junit-jupiter:5.8.1'
+    testImplementation 'junit:junit:4.13.1'
 }
 
 test {

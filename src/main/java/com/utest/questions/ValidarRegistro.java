@@ -1,16 +1,23 @@
 package com.utest.questions;
 
-import com.utest.userinterfaces.MensajeRegistroUI;
 import net.serenitybdd.screenplay.Actor;
 import net.serenitybdd.screenplay.Question;
+import net.serenitybdd.screenplay.targets.Target;
 
-public class ValidarRegistro implements Question {
+public class ValidarRegistro implements Question<String> {
 
-    @Override
-    public Object answeredBy(Actor actor) {
+    Target elemento;
 
-        return MensajeRegistroUI.IMG_REGISTRO.resolveFor(actor).isVisible();
+    public ValidarRegistro(Target elemento) {
+        this.elemento = elemento;
     }
 
-    public static Question validarMensaje(){ return new ValidarRegistro(); }
+    @Override
+    public String answeredBy(Actor actor) {
+        return elemento.resolveFor(actor).getText();
+    }
+
+    public static Question<String> validarMensaje(Target elemento){
+        return new ValidarRegistro(elemento);
+    }
 }

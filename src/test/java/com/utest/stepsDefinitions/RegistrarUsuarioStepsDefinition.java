@@ -1,45 +1,46 @@
 package com.utest.stepsDefinitions;
 
 import com.utest.questions.ValidarRegistro;
+import com.utest.tasks.Crear;
+import com.utest.tasks.Registrar;
+import com.utest.tasks.RegistrarLos;
 import com.utest.tasks.RegistrarUsuario;
-import com.utest.userinterfaces.PaginaPrincipalUI;
 import io.cucumber.java.Before;
 import io.cucumber.java.es.Cuando;
 import io.cucumber.java.es.Dado;
 import io.cucumber.java.es.Entonces;
-import net.serenitybdd.screenplay.Actor;
-import net.serenitybdd.screenplay.abilities.BrowseTheWeb;
 import net.serenitybdd.screenplay.actions.Open;
-import net.thucydides.core.annotations.Managed;
+import net.serenitybdd.screenplay.actors.OnStage;
+import net.serenitybdd.screenplay.actors.OnlineCast;
 import org.hamcrest.Matchers;
-import org.openqa.selenium.WebDriver;
 
+import static com.utest.userinterfaces.MensajeRegistroUI.TXT_REGISTRO;
+import static com.utest.utils.Constantes.ACTOR;
 import static net.serenitybdd.screenplay.GivenWhenThen.seeThat;
 
 public class RegistrarUsuarioStepsDefinition {
-
-    @Managed(driver = "Chrome")
-    private WebDriver navegador;
-    private Actor actor = Actor.named("actor");
-    PaginaPrincipalUI paginaPrincipalUI = new PaginaPrincipalUI();
-
     @Before
     public void configuracion() {
-        actor.can(BrowseTheWeb.with(navegador));
+        OnStage.setTheStage(new OnlineCast());
     }
 
-    @Dado("que el usuario ingresa a la pagina de Utest")
-    public void queElUsuarioIngresaALaPaginaDeUtest() {
-        actor.wasAbleTo(Open.browserOn(paginaPrincipalUI));
+    @Dado("^que el usuario ingresa a la pagina de (.*)$")
+    public void queElUsuarioIngresaALaPaginaDe(String url) {
+        OnStage.theActorCalled(ACTOR).wasAbleTo(Open.url(url));
     }
 
-    @Cuando("el usuario se quiera registrar para crear una cuenta")
+    @Cuando("^el usuario se quiera registrar para crear una cuenta$")
     public void elUsuarioSeQuieraRegistrarParaCrearUnaCuenta() {
-        actor.attemptsTo(RegistrarUsuario.nuevo());
+        OnStage.theActorInTheSpotlight().attemptsTo(
+                RegistrarUsuario.nuevo(),
+                Registrar.localizacion(),
+                RegistrarLos.dispositivos(),
+                Crear.contrasena()
+        );
     }
 
-    @Entonces("el visualizara un mensaje de bienvenido")
-    public void elVisualizaraUnMensajeDeBienvenido() {
-        actor.should(seeThat("El actor puede ver", ValidarRegistro.validarMensaje(), Matchers.equalTo(true)));
+    @Entonces("^el visualizara un mensaje de (.*)$")
+    public void elVisualizaraUnMensajeDe(String texto) {
+        OnStage.theActorInTheSpotlight().should(seeThat(ValidarRegistro.validarMensaje(TXT_REGISTRO), Matchers.containsString(texto)));
     }
 }
