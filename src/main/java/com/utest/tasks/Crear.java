@@ -26,7 +26,7 @@ public class Crear implements Task {
                 WaitUntil.the(CHK_POLITICASDESEGURIDAD, isClickable()).forNoMoreThan(10).seconds(),
                 Click.on(CHK_POLITICASDESEGURIDAD),
                 Click.on(BTN_COMPLETE),
-                EsperaExplicita.esperar(20)
+                EsperaExplicita.esperar(10)
         );
     }
 

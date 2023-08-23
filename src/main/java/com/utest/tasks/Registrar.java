@@ -29,7 +29,7 @@ public class Registrar implements Task {
                 Enter.theValue(datos.getPais()).into(TXT_PAIS),
                 Enter.keyValues(Keys.ENTER).into(TXT_PAIS),
                 WaitUntil.the(TXT_CIUDAD, isCurrentlyEnabled()).forNoMoreThan(20).seconds(),
-                Enter.theValue(datos.getCiudad()).into(TXT_CIUDAD),
+                Enter.theValue("A").into(TXT_CIUDAD),
                 EsperaExplicita.esperar(3),
                 Enter.keyValues(Keys.ARROW_DOWN).into(TXT_CIUDAD),
                 Enter.keyValues(Keys.ENTER).into(TXT_CIUDAD),

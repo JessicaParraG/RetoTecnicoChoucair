@@ -19,6 +19,7 @@ import static com.utest.utils.Constantes.ACTOR;
 import static net.serenitybdd.screenplay.GivenWhenThen.seeThat;
 
 public class RegistrarUsuarioStepsDefinition {
+
     @Before
     public void configuracion() {
         OnStage.setTheStage(new OnlineCast());
